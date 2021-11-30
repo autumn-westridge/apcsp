@@ -1,0 +1,16 @@
+body {
+  background-color: black;
+  color: #FFDDAA;
+}
+
+#gamebox {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+img {
+  width: 50%;
+  display: none;
+  margin-left: 25%;
+}
