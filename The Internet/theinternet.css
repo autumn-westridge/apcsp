@@ -1,0 +1,9 @@
+#box1 {
+  text-align: center;
+  width: 100%;
+}
+
+.invisible {
+  display:none;
+  text-align: right;
+}
