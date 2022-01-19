@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Logic Gates Game</title>
+    <link rel="stylesheet" href="webgame.css">
+  </head>
+  <body>
+    <img src="logicgates.png" style="width: 100%">
+    <div id="infobox">
+      <table id="boundingtable">
+        <tr>
+          <td style="width: 60%">
+            <div id="seldesc">
+              <select id="whichGate" onchange="changeGate(this)">
+                <option value="AND">AND</option>
+                <option value="OR">OR</option>
+                <option value="NOT">NOT</option>
+                <option value="NAND">NAND</option>
+                <option value="NOR">NOR</option>
+                <option value="XOR">XOR</option>
+              </select>
+              <p id="description">AND evaluates to true if and only if BOTH inputs are true. This is similar to how 'and' works in English; if you say 'I have a dog AND I have a cat', that statement is true only if you have both a dog and a cat.</p>
+            </div>
+          </td>
+          <td>
+            <table id="truthtable">
+              <tr>
+                <th colspan="3" id="label">
+                    AND
+                </th>
+              </tr>
+              <tr>
+                <td class="in1 in1H">Input 1</td>
+                <td class="in2 in2H">Input 2</td>
+                <td class="result resultH">Result</td>
+              </tr>
+              <tr>
+                <td class="false in1">0</td>
+                <td class="false in2">0</td>
+                <td class="false result" id="00">0</td>
+              </tr>
+              <tr>
+                <td class="false in1">0</td>
+                <td class="true in2">1</td>
+                <td class="false result" id="01">0</td>
+              </tr>
+              <tr>
+                <td class="true in1">1</td>
+                <td class="false in2">0</td>
+                <td class="false result" id="10">0</td>
+              </tr>
+              <tr>
+                <td class="true in1">1</td>
+                <td class="true in2">1</td>
+                <td class="true result" id="11">1</td>
+              </tr>
+            </table>
+            <table id="truthtablenot">
+              <tr>
+                <th colspan=2>
+                    NOT
+                </th>
+              </tr>
+              <tr>
+                <td class="in1 in1H">Input</td>
+                <td class="result resultH">Result</td>
+              </tr>
+              <tr>
+                <td class="false in1">0</td>
+                <td class="true result">1</td>
+              </tr>
+              <tr>
+                <td class="true in1">1</td>
+                <td class="false result">0</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="gamebox">
+      <h1>Try it:</h1>
+      <p style="display:inline-block; padding-left:10px; padding-right:10px; margin-top: -10px">Select a gate type from the dropdown, then click the buttons to change the value between true and false. The result will change to the correct result from the truth table.</p>
+      <table id="game">
+        <tr>
+          <td>
+            <h3>Input 1:</h3>
+            <h1 class="gamebutton false" id="gamebutton1" onclick="gameClick(this)">FALSE</h1>
+          </td>
+          <td><h1 id="gamegate">AND</h1></td>
+          <td>
+            <h3>Input 2:</h3>
+            <h1 class="gamebutton false" id="gamebutton2" onclick="gameClick(this)">FALSE</h1>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <img src="arrow.png" style="width: 20%">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <h3>Result:</h3>
+            <h1 class="gamebutton false" id="resultbutton">FALSE</h1>
+          </td>
+        </tr>
+      </table>
+      <table id="gamenot">
+        <tr>
+          <td>
+            <h3>Input 1:</h3>
+            <h1 class="gamebutton false" id="gamebutton3" onclick="gameClick(this)">FALSE</h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <h1 style="margin-top: -15px;">NOT</h1>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img src="arrowdown.png" style="width:50px;">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3">
+            <h3>Result:</h3>
+            <h1 class="gamebutton true" id="resultbuttonnot">FALSE</h1>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div id="scroll">
+    </div>
+    <script src="webgame.js"></script>
+  </body>
+</html>
