@@ -26,11 +26,13 @@ function clientIPSend(segment) {
 }
 
 function routePacket(packet) {
-    let rand_timeout = Math.random() * 100;
-
+    // Random number between 100 and 300 ms to simulate network routing/variable delay
+    let rand_timeout = (Math.random() * 200) + 100;
+    setTimeout(function() { serverIPReceive(packet) }, rand_timeout);
 }
 
 var serverPackets = [];
 function serverIPReceive(packet) {
-    
+    // Add this into the list of packets at the right place
+    serverPackets.splice(packet.packet_num, 0, packet);
 }
