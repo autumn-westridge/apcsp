@@ -8,14 +8,14 @@ const client_ip = "49.81.27.109";
 /* HTTP is to get HTML from the server */
 function clientHTTP(url) {
     // Build HTTP request
-    let http_request = {
+    var http_request = {
         "src": client_ip,           // The source (the client)
         "dest": url,                // The destination (the server)
         "request_method": "GET"     // Request type (get content)
     }
     
     // Send this to the server (pass HTTP request as an argument)
-    let response = serverHTTP(http_request);
+    var response = serverHTTP(http_request);
     // Return the HTML
     return response.content;
 }
@@ -24,7 +24,7 @@ function clientHTTP(url) {
 function serverHTTP(http_request) {
     // Define this so we have it available at the end of the function
     // src and dest will be the same whether this is a valid request or not
-    let http_response = {
+    var http_response = {
         "src": http_request.dest,    // The source (this website)
         "dest": http_request.src,    // Where this is going (client)
     }
@@ -35,7 +35,7 @@ function serverHTTP(http_request) {
      */
     if (http_request.request_method == "GET" && Object.keys(server_data).indexOf(http_request.dest) > -1) {
         // Get the HTML data
-        let html = server_data[http_request.dest];
+        var html = server_data[http_request.dest];
         // Add the HTML to the response
         http_response.content = html;
     }
