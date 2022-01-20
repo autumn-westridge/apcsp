@@ -9,16 +9,6 @@ function http(url) {
     return content;
 }
 
-// Browser display function shows the returned HTML
-function browserDisplay(html) {
-    console.log(html);
-}
-
-// User navigates to a URL. HTTP gets the HTML, then the browser displays the HTML
-function webRequest(url) {
-    let html = http(url);
-    browserDisplay(html);
-}
-
 // User requests "theinternet.com"
-webRequest("theinternet.com");
+var http_response_content = http("theinternet.com");
+console.log(http_response_content);

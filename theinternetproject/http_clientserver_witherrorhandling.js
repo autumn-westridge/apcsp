@@ -46,16 +46,6 @@ function serverHTTP(http_request) {
     return http_response;
 }
 
-// Browser display function shows the returned HTML
-function browserDisplay(html) {
-    console.log(html);
-}
-
-// User navigates to a URL. HTTP gets the HTML, then the browser displays the HTML
-function webRequest(url) {
-    let html = clientHTTP(url);
-    browserDisplay(html);
-}
-
 // User requests "theinternet.com"
-webRequest("theinternet.com");
+var http_response_content = clientHTTP("theinternet.com");
+console.log(http_response_content);
