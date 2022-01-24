@@ -11,13 +11,17 @@ const client_ip = "49.81.27.109";
 /* HTTP is to get HTML from the server */
 function clientHTTP(url) {
     // DNS request
-    var server_ip = dns(url);
+    var dns_response = dns(url);
+    // If the response is NXDOMAIN (URL does not exist), abort
+    if (dns_response.response_code == "NXDOMAIN") {
+        return "Specified URL does not exist";
+    }
 
     // Build HTTP request
     var http_request = {
-        "src": client_ip,           // The source (the client)
-        "dest": server_ip,          // The destination (the server)
-        "request_method": "GET"     // Request type (get content)
+        "src": client_ip,                   // The source (the client)
+        "dest": dns_response.ip_address,    // The destination (the server)
+        "request_method": "GET"             // Request type (get content)
     }
     
     // Send this to the server (pass HTTP request as an argument)
@@ -68,7 +72,19 @@ const dns_lookup = {
 }
 
 function dns(url) {
-    return dns_lookup[url];
+    if (Object.keys(dns_lookup).indexOf(url) > -1) {
+        var dns_response = {
+            "ip_address": dns_lookup[url],
+            "response_code": "NOERROR"
+        }
+        return dns_response;
+    }
+    else {
+        var dns_response = {
+            "response_code": "NXDOMAIN"
+        }
+        return dns_response;
+    }
 }
 /*************************************************************************************************
  * END DNS
