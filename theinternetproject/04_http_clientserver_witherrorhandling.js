@@ -16,8 +16,14 @@ function clientHTTP(url) {
     
     // Send this to the server (pass HTTP request as an argument)
     var response = serverHTTP(http_request);
-    // Return the HTML
-    return response.content;
+    // If this is a good request, return the HTML
+    if (response.response_code == 200) {
+        return response.content;
+    }
+    // Otherwise, return the response code
+    else {
+        return response.response_code;
+    }
 }
 
 /* Server receives the request and returns a response with the HTML */
@@ -38,10 +44,11 @@ function serverHTTP(http_request) {
         var html = server_data[http_request.dest];
         // Add the HTML to the response
         http_response.content = html;
+        http_response.response_code = 200;
     }
     else {
         // Bad request
-        http_response.content = "400";
+        http_response.response_code = 400;
     }
     
     // Send back to the client
