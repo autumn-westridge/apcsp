@@ -7,18 +7,33 @@ const client_ip = "49.81.27.109";
 
 /* HTTP is to get HTML from the server */
 function clientHTTP(url) {
-    // Send this to the server (pass URL as an argument)
-    var response = serverHTTP(url);
+    // Build HTTP request
+    var http_request = {
+        "src": client_ip,           // The source (the client)
+        "dest": url,                // The destination (the server)
+        "request_method": "GET"     // Request type (get content)
+    }
+    
+    // Send this to the server (pass HTTP request as an argument)
+    var response = serverHTTP(http_request);
     // Return the HTML
-    return response;
+    return response.content;
 }
 
 /* Server receives the request and returns a response with the HTML */
-function serverHTTP(url) {
+function serverHTTP(http_request) {
     // Get the HTML data
-    var html = server_data[url];
+    var html = server_data[http_request.dest];
+
+    // Build the response with the HTML
+    var http_response = {
+        "src": http_request.dest,    // The source (this website)
+        "dest": http_request.src,    // Where this is going (client)
+        "content": html,             // The HTML for this site
+    }
+    
     // Send back to the client
-    return html;
+    return http_response;
 }
 
 // User requests "theinternet.com"
