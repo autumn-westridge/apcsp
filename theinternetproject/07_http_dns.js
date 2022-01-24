@@ -26,8 +26,14 @@ function clientHTTP(url) {
     
     // Send this to the server (pass HTTP request as an argument)
     var response = serverHTTP(http_request);
-    // Return the HTML
-    return response.content;
+    // If this is a good request, return the HTML
+    if (response.response_code == 200) {
+        return response.content;
+    }
+    // Otherwise, return the response code
+    else {
+        return response.response_code;
+    }
 }
 
 /* Server receives the request and returns a response with the HTML */
