@@ -54,10 +54,11 @@ function serverHTTP(http_request) {
         var html = server_data[http_request.dest];
         // Add the HTML to the response
         http_response.content = html;
+        http_response.response_code = 200;
     }
     else {
         // Bad request
-        http_response.content = "400";
+        http_response.response_code = 400;
     }
     
     // Send back to the client
