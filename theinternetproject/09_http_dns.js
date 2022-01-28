@@ -7,20 +7,22 @@ const server_data = {
 }
 // The client's IP address
 const client_ip = "49.81.27.109";
+// IP address of the DNS server
+const dns_server_ip = "8.8.8.8";
 
 /* HTTP is to get HTML from the server */
 function clientHTTP(url) {
     // DNS request
-    var dns_response = dns(url);
+    var dns_response = clientDNS(url);
     // If the response is NXDOMAIN (URL does not exist), abort
-    if (dns_response.response_code == "NXDOMAIN") {
+    if (dns_response == "NXDOMAIN") {
         return "Specified URL does not exist";
     }
 
     // Build HTTP request
     var http_request = {
         "src": client_ip,                   // The source (the client)
-        "dest": dns_response.ip_address,    // The destination (the server)
+        "dest": dns_response,               // The destination (the server)
         "request_method": "GET"             // Request type (get content)
     }
     
@@ -70,28 +72,50 @@ function serverHTTP(http_request) {
 /*************************************************************************************************
  * BEGIN DNS
  *************************************************************************************************/
-const dns_lookup = {
+ const dns_lookup = {
     "theinternet.com":      "18.223.98.107",
     "kittens.com":          "91.198.152.91",
-    "google.com":           "8.8.8.8",
+    "google.com":           "8.8.8.9",
     "wikipedia.org":        "66.67.68.69",
     "thewaroncars.com":     "174.203.4.198"
 }
 
-function dns(url) {
+
+function serverDNS(request) {
+    // Pull the URL out
+    var url = request.url;
+
+    // We're gonna send back the source and destination in any case
+    var dns_response = {
+        "source": request.destination,
+        "destination": request.source
+    }
+
+    // If this URL exists in our DNS database, return the IP address. Else return NXDOMAIN
     if (Object.keys(dns_lookup).indexOf(url) > -1) {
-        var dns_response = {
-            "ip_address": dns_lookup[url],
-            "response_code": "NOERROR"
-        }
-        return dns_response;
+        dns_response.ip = dns_lookup[url];
+        dns_response.code = "NOERROR";
     }
     else {
-        var dns_response = {
-            "response_code": "NXDOMAIN"
-        }
-        return dns_response;
+        dns_response.code = "NXDOMAIN";
     }
+
+    return dns_response;
+}
+
+function clientDNS(url) {
+    // Build the request object && send to server
+    var dns_request = {
+        "source": client_ip,
+        "destination": dns_server_ip,
+        "url": url
+    }
+    var response = serverDNS(dns_request);
+    // If the request worked, return the IP address. Else return the error code
+    if (response.code == "NOERROR" ) {
+        return response.ip;
+    }
+    return response.code;
 }
 /*************************************************************************************************
  * END DNS
