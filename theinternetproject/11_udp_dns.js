@@ -183,13 +183,11 @@ function clientDNS(url) {
  * PROMISE CRAP THIS STUFF IS COMPLICATED
  ************************************************/
 function defer(url) {
-    var res, rej;
-    var promise = new Promise((resolve, reject) => {
+    var res;
+    var promise = new Promise((resolve) => {
         res = resolve;
-        rej = reject;
     });
     promise.resolve = res;
-    promise.reject = rej;
 
     // This actually kicks off the client DNS call
     clientDNS(url);
