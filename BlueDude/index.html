@@ -8,7 +8,7 @@
     <div id="headerbox">
       <h1>The Blue Dude Game</h1>
     </div>
-    <button onclick="help()">Help</button>
+    <button onclick="showModal('Move: Arrow keys\nInteract with object: Enter\nYou must overlap with object to interact with it.')">Help</button>
     <div id="gamebox">
       <div id="modal">
         <div id="modalText"></div>
@@ -18,8 +18,10 @@
       </div>
       <img id="bluedude" src="bluedude.png">
       <img id="boxclosed" src="boxclosed.png" class="gs0 box">
-      <img id="boxopen" src="boxopen.png" class="gs1 box">
-      <img id="doorclosed" src="doorclosed.png" class="gs0 gs1 gs2 door">
+      <img id="boxopen" src="boxopen.png" class="gs1 gs3 box">
+      <img id="doorclosed" src="doorclosed.png" class="gs0 gs1 door">
+      <img id="dooropen" src="dooropen.png" class="gs2 gs3 door">
+      <img id="purpledude" src="purpledude.png" class="gs2">
     </div>
     <script src="webgame.js"></script>
   </body>

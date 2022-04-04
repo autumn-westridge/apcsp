@@ -1,12 +1,14 @@
 var gameState = -1;
-var gameStateMax = 3;
+var gameStateMax = 4;
 
 var dudeX = 100;
 var dudeY = 300;
+var minX = 0;
+var minY = -50;
 var maxX = 540;
 var maxY = 380;
 
-var moveAmt = 10;
+var moveAmt = 15;
 
 var modalShowing = false;
 
@@ -31,7 +33,7 @@ function checkMove(e) {
     }
   }
   else if (e.code == "ArrowLeft") {
-    if (dudeX > 0) {
+    if (dudeX > minX) {
       dudeX -= moveAmt;
     }
   }
@@ -41,7 +43,7 @@ function checkMove(e) {
     }
   }
   else if (e.code == "ArrowUp") {
-    if (dudeY > 0) {
+    if (dudeY > minY) {
       dudeY -= moveAmt;
     }
   }
@@ -69,10 +71,6 @@ function elementsOverlap(el1, el2) {
     domRect1.bottom < domRect2.top ||
     domRect1.left > domRect2.right
   );
-}
-
-function help() {
-  showModal("Move: Arrow keys\nInteract with object: Enter");
 }
 
 function showModal(msg, img) {
@@ -107,32 +105,75 @@ function openDoor() {
     showModal("You unlock the door and procede into the next room.");
     advanceGameState();
   }
+  else if (gameState == 2) {
+    advanceGameState();
+  }
+  else if (gameState == 3) {
+    advanceGameState(true)
+  }
 }
 
-function advanceGameState() {
+function advanceGameState(decrease) {
+  if (decrease) {
+    gameState--;
+  }
+  else {
+    gameState++;
+  }
+  changeElements();
+  changeDisplay();
+}
+
+function changeElements() {
   for (var i = 0; i < gameStateMax; i++) {
     var els = document.getElementsByClassName("gs" + i);
     for (var j = 0; j < els.length; j++) {
       els[j].style.display = "none";
     }
   }
-  gameState++;
   var els = document.getElementsByClassName("gs" + gameState);
   for (var j = 0; j < els.length; j++) {
     els[j].style.display = "block";
   }
 }
 
+function changeDisplay() {
+  var displayVals = display[gameState];
+  var keys = Object.keys(displayVals);
+  for (var i = 0; i < keys.length; i++) {
+    gamebox.style[keys[i]] = displayVals[keys];
+  }
+}
+
 var bluedude = document.getElementById("bluedude");
+var gamebox = document.getElementById("gamebox");
 var modal = document.getElementById("modal");
 var modalText = document.getElementById("modalText");
 var modalImg = document.getElementById("modalImg");
 document.addEventListener("keydown", checkKey);
 
-advanceGameState();
-
 var interactive_elements = {
   "boxclosed": openBox,
   "boxopen": boxEmpty,
-  "doorclosed": openDoor
+  "doorclosed": openDoor,
+  "dooropen": openDoor,
 };
+
+var display = [
+  // 0
+  {
+    "backgroundColor": "#333"
+  },
+  // 1
+  {},
+  // 2
+  {
+    "backgroundColor": "#332200"
+  },
+  // 3
+  {
+    "backgroundColor": "#333"
+  },
+]
+
+advanceGameState();
