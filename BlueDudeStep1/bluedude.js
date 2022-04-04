@@ -7,8 +7,6 @@ var maxY = 380;
 
 var moveAmt = 10;
 
-var modalShowing = false;
-
 function checkKey(e) {
   if (e.code.startsWith("Arrow")) {
     checkMove(e);
