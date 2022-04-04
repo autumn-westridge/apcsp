@@ -16,14 +16,6 @@ function checkKey(e) {
   if (e.code.startsWith("Arrow")) {
     checkMove(e);
   }
-  else if (e.code == "Enter") {
-    if (modalShowing) {
-      hideModal();
-    }
-    else {
-      checkInteraction();
-    }
-  }
 }
 
 function checkMove(e) {
