@@ -1,6 +1,3 @@
-var gameState = -1;
-var gameStateMax = 2;
-
 var dudeX = 100;
 var dudeY = 300;
 var minX = 0;
