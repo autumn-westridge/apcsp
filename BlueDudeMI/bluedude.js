@@ -90,11 +90,13 @@ function hideModal() {
 }
 
 function openBox() {
-  showModal("You got an orange key.", "orangekey.png");
-  advanceGameState();
-}
-function boxEmpty() {
-  showModal("There's nothing else in here.");
+  if (gameState == 0) {
+    showModal("You got an orange key.", "orangekey.png");
+    advanceGameState();
+  }
+  else {
+    showModal("There's nothing else in here.");    
+  }
 }
 
 function openDoor() {
@@ -102,7 +104,7 @@ function openDoor() {
     showModal("It's locked.");
   }
   else if (gameState == 1) {
-    showModal("You unlock the door and procede into the next room.");
+    showModal("You unlock the door with the orange key and procede into the next room.");
     advanceGameState();
   }
   else if (gameState == 2) {
@@ -154,7 +156,7 @@ document.addEventListener("keydown", checkKey);
 
 var interactive_elements = {
   "boxclosed": openBox,
-  "boxopen": boxEmpty,
+  "boxopen": openBox,
   "doorclosed": openDoor,
   "dooropen": openDoor,
 };

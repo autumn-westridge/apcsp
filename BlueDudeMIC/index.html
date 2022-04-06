@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blue Dude</title>
+    <link rel="stylesheet" href="bluedude.css">
+  </head>
+  <body>
+    <div id="headerbox">
+      <h1>The Blue Dude Game</h1>
+    </div>
+    <button onclick="showModal('Move: Arrow keys\nInteract with object: Enter\nYou must overlap with object to interact with it.')">Help</button>
+    <div id="gamebox">
+      <div id="modal" class="popup">
+        <div id="modalText"></div>
+        <img id="modalImg">
+        <br/>
+        <button onclick="hideModal()">OK</button>
+      </div>
+      <div id="convo" class="popup">
+      </div>
+      <img id="bluedude" src="bluedude.png">
+      <img id="boxclosed" src="boxclosed.png" class="gs0 box">
+      <img id="boxopen" src="boxopen.png" class="gs1 gs3 box">
+      <img id="doorclosed" src="doorclosed.png" class="gs0 gs1 door">
+      <img id="dooropen" src="dooropen.png" class="gs2 gs3 door">
+      <img id="purpledude" src="purpledude.png" class="gs2">
+    </div>
+    <script src="convo_purpledude.js"></script>
+    <script src="bluedude.js"></script>
+  </body>
+</html>
