@@ -56,10 +56,10 @@ void loop() {
       case 4:
         buf = 'l';
         break;
-    //}
+    }
     Serial.println(buf);
     radio.write(&buf, sizeof(buf));
-    last_fb = fb;
-  }
+    //last_fb = fb;
+  //}
   delay(20);
 }
