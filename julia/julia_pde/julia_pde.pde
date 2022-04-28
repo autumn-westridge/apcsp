@@ -26,7 +26,7 @@ void mouseMoved() {
 }
 
 // Draws the Julia Set for the given complex number ca + cb*i
-void drawJuliaSet(float ca, float cb) {
+void drawJuliaSet(float d, float e) {
   // Draw a black background (overwrite previous drawing)
   background(0);
 
@@ -40,8 +40,8 @@ void drawJuliaSet(float ca, float cb) {
       float b = getImaginary(row);
 
       while ((a*a + b*b) <= 2*2 && iterations < max_iterations) {
-        float new_a = a*a - b*b + ca;
-        float new_b = 2*a*b + cb;
+        float new_a = a*a - b*b + d;
+        float new_b = 2*a*b + e;
         a = new_a;
         b = new_b;
         iterations++;
