@@ -48,11 +48,11 @@ void drawJuliaSet(float d, float e) {
       }
 
       if (iterations == max_iterations) {
-        stroke(255);
+        stroke(255, 255, 255);
       }
       else {
-        // The more iterations it took to escape, the smaller this number will be -> the closer to black
-        stroke(1.0*iterations/max_iterations * 255);
+        float scale = 1.0*iterations/max_iterations * 255;
+        stroke(scale, scale, scale);
       }
 
       point(col, row);
